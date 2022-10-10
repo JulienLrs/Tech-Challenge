@@ -1,24 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Equipage from "./components/Equipage";
+
+const allMatelots = [
+  {
+    id: 1,
+    name: "Eleftheria",
+    adjectif: "",
+  },
+  {
+    id: 2,
+    name: "Gennadios",
+    adjectif: "",
+  },
+  {
+    id: 3,
+    name: "Lysimachos",
+    adjectif: "",
+  },
+];
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <h1>Les Argonautes</h1>
+      <h2>Ajouter un(e) Argonaute</h2>
+      <p>Nom de l'Argonaute</p>
+      
+      <h2>Membre de l'équipage</h2>
+      
+      <Equipage todos={allMatelots}/>
+    </>
   );
 }
 

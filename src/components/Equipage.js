@@ -1,15 +1,16 @@
 import React from "react";
+import Presence from "./Presence";
 
-export default function TodoList(props) {
-  return <p>"L'équipage se forme..."</p>;
+export default function Equipage(props) {
+  return (
+    <ul>
+      {props.matelots.map((matelot) => (
+        <Presence
+          key={matelot.id}
+          data={matelot}
+          handleStatusChange={props.handleStatusChange}
+        />
+      ))}
+    </ul>
+  );
 }
-
-{/* <ul>
-  {props.equipage.map((matelot) => (
-    // des que l'on vient itérrer,
-    // il faut penser à les identifier à l'aide de key
-    <li key={matelot.id}>
-      {matelot.name} {matelot.adjectif}
-    </li>
-  ))}
-</ul>; */}

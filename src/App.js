@@ -32,16 +32,16 @@ function App() {
 
   // Nous permet à la création du component, de chercher dans notre storage
   useEffect(() => {
-    localStorage.setItem(key, JSON.stringify(matelots));
-  }, [matelots])
-
-  // Vient persister dans le storage notre donnée entrée 
-  useEffect(() => {
     const matelotsRetrievedFromStorage = localStorage.getItem(key);
     if (matelotsRetrievedFromStorage) {
       setMatelots(JSON.parse(matelotsRetrievedFromStorage))
     }
   }, []);  // insertion d'une dépendance [] pour éviter les boucles infinies
+  
+  // Vient persister dans le storage notre donnée entrée 
+  useEffect(() => {
+    localStorage.setItem(key, JSON.stringify(matelots));
+  }, [matelots])
   
 
   function handleStatusChange(id) {
@@ -72,7 +72,7 @@ function App() {
       <p>Nom de l'Argonaute</p>
       <Formulaire handleMatelotCreation={handleMatelotCreation}/>
       <h2>Membre de l'équipage</h2>
-      <div>Numéro de mon matelot vaut : {matelotId} </div>
+      <div>Numéro de mon matelot : {matelotId} </div>
       <Equipage
         matelots={matelots}
         handleStatusChange={handleStatusChange}

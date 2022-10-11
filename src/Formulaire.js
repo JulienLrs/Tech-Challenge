@@ -1,22 +1,28 @@
 import React, { useState } from "react";
 
-export default function TodoForm() {
-    const [name, setName] = useState("");
+export default function MatelotForm({ handleMatelotCreation }) {
+  const [name, setName] = useState("");
 
-    function handleNouveauchange(e) {
-        setNouveau(e.target.value);
-    }
+  function handleNameChange(e) {
+    setName(e.target.value);
+  }
 
-    return (
-        <form>
-            <input 
-            type="text" 
-            placeholder="inscris toi matelot !" 
-            name="name"
-            value={name}
-            onChange={e => handleNouveauchange(e)}
-            />
-            <button type="submit">Ajouter</button>
-        </form>
-    )
+  function handleFormSubmit(e) {
+    e.preventDefault();
+    handleMatelotCreation(name);
+    setName("");
+  }
+
+  return (
+    <form onSubmit={handleFormSubmit}>
+      <input
+        type="text"
+        placeholder="Inscris-toi matelot !"
+        name="name"
+        value={name}
+        onChange={(e) => handleNameChange(e)}
+      />
+      <button type="submit">Ajouter</button>
+    </form>
+  );
 }

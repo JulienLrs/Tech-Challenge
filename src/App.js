@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Equipage from "./components/Equipage";
 import Formulaire from "./Formulaire";
+import './App.css';
 
 const allMatelots = [
   {
@@ -30,6 +31,11 @@ function App() {
   const [matelotId, setMatelotId] = useState(); // retour d'un tableau : res = [matelotId, setMatelotId]
   const [matelots, setMatelots] = useState(allMatelots);
 
+  // Vient persister dans le storage notre donnée entrée 
+  useEffect(() => {
+    localStorage.setItem(key, JSON.stringify(matelots));
+  }, [matelots])
+
   // Nous permet à la création du component, de chercher dans notre storage
   useEffect(() => {
     const matelotsRetrievedFromStorage = localStorage.getItem(key);
@@ -38,10 +44,6 @@ function App() {
     }
   }, []);  // insertion d'une dépendance [] pour éviter les boucles infinies
   
-  // Vient persister dans le storage notre donnée entrée 
-  useEffect(() => {
-    localStorage.setItem(key, JSON.stringify(matelots));
-  }, [matelots])
   
 
   function handleStatusChange(id) {
@@ -66,19 +68,30 @@ function App() {
   };
 
   return (
-    <>
+    
+    <div class="form-box">
       <h1>Les Argonautes</h1>
       <h2>Ajouter un(e) Argonaute</h2>
       <p>Nom de l'Argonaute</p>
-      <Formulaire handleMatelotCreation={handleMatelotCreation}/>
+
+      <Formulaire 
+      handleMatelotCreation={handleMatelotCreation}/>
+    
       <h2>Membre de l'équipage</h2>
-      <div>Numéro de mon matelot : {matelotId} </div>
+      <div class="id">Identifiant de mon matelot : {matelotId} </div>
+
       <Equipage
+        class="member-item"
         matelots={matelots}
         handleStatusChange={handleStatusChange}
       />
-    </>
+    </div>
+
+
   );
 }
 
 export default App;
+
+
+

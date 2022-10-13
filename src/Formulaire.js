@@ -27,7 +27,7 @@ const Inscription = ({ handleMatelotCreation }) => {
 
   function handleFormSubmit(e) {
     e.preventDefault();
-    handleMatelotCreation(name);
+    handleMatelotCreation(name, adjectif);
     setName("");
     setAdjectif("");
   }
@@ -50,6 +50,7 @@ const Inscription = ({ handleMatelotCreation }) => {
         className="inputBox"
         type="text"
         placeholder="Adjectif"
+        name="adjectif"
         value={adjectif}
         onChange={(e) => handleAdjectifChange(e)}
       />

@@ -21,7 +21,31 @@ label {
   display: block;
   margin-bottom: 0.5em;
 }
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
 
+th {
+  border: 1px solid #ffffff;
+  text-align: left;
+  padding: 8px;
+  font-size: 20px;
+}
+
+td {
+  text-align: left;
+  padding: 4px;
+  font-size: 18px;
+}
+
+th {
+  background-color: rgb(226, 146, 150);
+}
+
+td {
+  background-color: rgb(228, 207, 207);
+}
 .new-member-form {
   display: block;
   margin: 15px;

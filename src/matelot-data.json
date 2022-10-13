@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "name": "Eleftheria",
+        "adjectif": "Curieux",
+        "present": false
+      },
+      {
+        "id": 2,
+        "name": "Gennadios",
+        "adjectif": "Courageux",
+        "present": false
+      },
+      {
+        "id": 3,
+        "name": "Lysimachos",
+        "adjectif": "Perspicace",
+       "present": false
+      }
+]

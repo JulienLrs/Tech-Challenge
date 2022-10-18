@@ -17,16 +17,27 @@ h1, h2, p {
   text-align: center;
 }
 
+h2 {
+  margin-top: 2em;
+}
+
 label {
   display: block;
   margin-bottom: 0.5em;
 }
 table {
+  margin: auto;
+  text-align: center;
   border-collapse: collapse;
-  width: 100%;
+  width: 50%;
+}
+
+thead {
+  column-count: 3;
 }
 
 th {
+  background-color: #d87a7a;
   border: 1px solid #ffffff;
   text-align: left;
   padding: 8px;
@@ -35,17 +46,11 @@ th {
 
 td {
   text-align: left;
-  padding: 4px;
+  padding: 3px;
   font-size: 18px;
-}
-
-th {
-  background-color: rgb(226, 146, 150);
-}
-
-td {
   background-color: rgb(228, 207, 207);
 }
+
 .new-member-form {
   display: block;
   margin: 15px;
@@ -58,9 +63,9 @@ td {
 }
 
 footer {
-  margin-top: 2em;
+  margin-top: 19em;
   text-align: center;
   color: #fff;
-  background: #f76c6c;
+  background: #d87a7a;
   padding: 0.25em 0;
 }

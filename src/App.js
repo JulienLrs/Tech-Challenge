@@ -1,50 +1,24 @@
 import React, { useState, useEffect } from "react";
-import Equipage from "./components/Equipage";
-import Formulaire from "./Formulaire";
-import data from "./matelot-data.json";
 import "./App.css";
-
-const allMatelots = [
-  {
-    id: 1,
-    name: "Eleftheria",
-    adjectif: "",
-    present: false,
-  },
-  {
-    id: 2,
-    name: "Gennadios",
-    adjectif: "",
-    present: false,
-  },
-  {
-    id: 3,
-    name: "Lysimachos",
-    adjectif: "",
-    present: false,
-  },
-];
+import data from "./matelot-data.json";
+import Formulaire from "./Formulaire";
 
 const key = "react.matelots";
 
-function App(props) {
-  //const [contacts, setContacts] = useState(data);
-  const [matelotId, setMatelotId] = useState(); // retour d'un tableau : res = [matelotId, setMatelotId]
-  const [matelots, setMatelots] = useState(allMatelots);
+const App = (props) => {
+  const [matelots, setMatelots] = useState(data);
+  const [matelotId, setMatelotId] = useState();
+  const matelot = props.data;
 
-
-  // Nous permet à la création du component, de chercher dans notre storage
-  useEffect(() => {
-    const matelotsRetrievedFromStorage = localStorage.getItem(key);
-    if (matelotsRetrievedFromStorage) {
-      setMatelots(JSON.parse(matelotsRetrievedFromStorage));
-    }
-  }, []); // insertion d'une dépendance [] pour éviter les boucles infinies
-  
-  // Vient persister dans le storage notre donnée entrée
-  useEffect(() => {
-    localStorage.setItem(key, JSON.stringify(matelots));
-  }, [matelots]);
+  function handleMatelotCreation(name, adjectif) {
+    const newMatelot = {
+      id: Date.now(),
+      name,
+      adjectif,
+    };
+    const allMatelot = [newMatelot, ...matelots];
+    setMatelots(allMatelot);
+  }
 
   function handleStatusChange(id) {
     setMatelotId(id);
@@ -56,19 +30,21 @@ function App(props) {
     setMatelots(newMatelots);
   }
 
-  function handleMatelotCreation(name) {
-    const newMatelot = {
-      id: Date.now(),
-      name,
-      present: false,
-      adjectif: "",
-    };
-    const allMatelot = [newMatelot, ...matelots];
-    setMatelots(allMatelot);
-  }
+  // Nous permet à la création du component, de chercher dans notre storage
+  useEffect(() => {
+    const matelotsRetrievedFromStorage = localStorage.getItem(key);
+    if (matelotsRetrievedFromStorage) {
+      setMatelots(JSON.parse(matelotsRetrievedFromStorage));
+    }
+  }, []); // insertion d'une dépendance [] pour éviter les boucles infinies
+
+  // Vient persister dans le storage notre donnée entrée
+  useEffect(() => {
+    localStorage.setItem(key, JSON.stringify(matelots));
+  }, [matelots]);
 
   return (
-    <div class="form-box">
+    <div className="app-container">
       <h1>Les Argonautes</h1>
       <h2>Ajouter un(e) Argonaute</h2>
       <p>Nom de l'Argonaute</p>
@@ -76,17 +52,42 @@ function App(props) {
       <Formulaire handleMatelotCreation={handleMatelotCreation} />
 
       <h2>Membre de l'équipage</h2>
-      <div class="id">Identifiant de mon matelot : {matelotId} </div>
-      <Equipage
-                class="member-item"
-                matelots={matelots}
-                handleStatusChange={handleStatusChange}
-              />
-      
+      <table>
+        <thead>
+          <tr>
+            <th>Matelot</th>
+            <th>Adjectif</th>
+            <th>Présent</th>
+          </tr>
+        </thead>
+        <tbody>
+          {matelots.map((matelot) => (
+            <tr>
+              <td>
+                <input
+                  type="checkbox"
+                  key={matelot.id}
+                  checked={matelot.present}
+                  data={matelot}
+                  handleStatusChange={props.handleStatusChange}
+                  onChange={() => props.handleStatusChange(matelot.id)}
+                />
+                {matelot.name}
+              </td>
+              <td>{matelot.adjectif}</td>
+              <td>
+                <div>{matelot.present ? "A bord !" : "Manque à l'appel"}</div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      <footer>
+        <p>Réalisé par Jason en Anthestérion de l'an 515 avant JC</p>
+      </footer>
     </div>
   );
-}
+};
 
 export default App;
-
-
